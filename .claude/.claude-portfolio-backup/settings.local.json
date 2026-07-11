@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(mv .claude /tmp/../private/tmp/claude-501/-Users-azhar-Desktop-type-portfolio/2169f5b9-20ec-48f5-beca-b7ce1ddc0348/scratchpad/.claude-backup)",
+      "Bash(mv .claude ../.claude-portfolio-backup)",
+      "Bash(npx --yes create-next-app@latest . --js --eslint --tailwind --app --src-dir --import-alias \"@/*\" --use-npm --turbopack --skip-install)"
+    ]
+  }
+}

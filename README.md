@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Azhar — Developer Portfolio
 
-## Getting Started
+Premium full-stack developer portfolio for **Azharuddin Mohammad Hassan**, built with Next.js (App Router, JavaScript), MongoDB, GSAP and Three.js. Every piece of content is served from MongoDB and editable through a JWT-protected admin dashboard — no hardcoded portfolio data.
 
-First, run the development server:
+## Stack
+
+- **Frontend** — Next.js 16 (App Router), React 19, Tailwind CSS v4, GSAP (ScrollTrigger + SplitText), React Three Fiber + Drei, Lenis smooth scrolling, Lucide icons, Sonner toasts
+- **Backend** — Next.js Route Handlers, Mongoose 9, JWT (httpOnly cookie) auth, Nodemailer
+- **Design** — "Ink & Ember": warm near-black, ember-orange accent, Syne display type, Instrument Serif italics, JetBrains Mono details
+
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # then edit values
+npm run seed                 # load starter content into MongoDB
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> No MongoDB running? The public site still renders — data reads fall back to the canonical seed content in `src/lib/seed-data.js`. The admin dashboard and contact form need a real database.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Purpose |
+| --- | --- |
+| `MONGODB_URI` | MongoDB connection string (local or Atlas) |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL (SEO, sitemap, OG) |
+| `JWT_SECRET` | Secret for signing admin session tokens |
+| `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Admin credentials — password may be plain or a bcrypt hash |
+| `SMTP_HOST/PORT/USER/PASS`, `CONTACT_EMAIL` | Optional — email delivery for contact form (messages always persist to MongoDB) |
 
-## Learn More
+## Pages
 
-To learn more about Next.js, take a look at the following resources:
+| Route | Description |
+| --- | --- |
+| `/` | Animated landing — Three.js hero, about, experience, skills, featured projects, tech marquee, learning, journey timeline, contact CTA |
+| `/projects` | Filter + search across major projects, plus smaller experiments |
+| `/projects/[slug]` | Case study — overview, features, challenges/solutions, stack |
+| `/skills` | Interactive skill visualization by discipline |
+| `/experience` | Full professional timeline |
+| `/contact` | Contact form → MongoDB + optional email, with success animation |
+| `/admin` | JWT-protected dashboard — full CRUD on every collection |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+REST route handlers under `src/app/api`:
 
-## Deploy on Vercel
+- `POST /api/auth/login` · `POST /api/auth/logout` · `GET /api/auth/me`
+- `GET|PUT /api/profile`
+- `GET|POST /api/projects` · `GET|PUT|DELETE /api/projects/[id]` (id or slug)
+- Same CRUD shape for `minor-projects`, `skills`, `minor-skills`, `learning`, `experience`
+- `POST /api/contact` (public) · `GET /api/contact`, `PATCH|DELETE /api/contact/[id]` (admin)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Public `GET`s are open; every mutation requires the admin session cookie.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project structure
+
+```
+src/
+  app/            routes: (site) public pages, admin dashboard, api handlers
+  sections/       home page sections (Hero, About, Journey, …)
+  components/     ui primitives, chrome (navbar/cursor/palette), feature components
+  animations/     gsap setup + Reveal / TextReveal / Counter
+  hooks/          useMagnetic, useTilt
+  lib/            db, auth, crud factory, email, data access, seed data
+  models/         Mongoose models (8 collections)
+  three/          R3F hero scene
+scripts/seed.mjs  database seeder
+```
+
+## Deploying to Vercel
+
+1. Push to GitHub and import the repo in Vercel.
+2. Set the env vars above (`MONGODB_URI` → MongoDB Atlas, strong `JWT_SECRET`/`ADMIN_PASSWORD`, `NEXT_PUBLIC_SITE_URL` → production URL).
+3. Deploy, then run `npm run seed` locally pointed at Atlas (or add content through `/admin`).
+
+## Notes
+
+- Drop your resume at `public/resume.pdf` (linked from the hero, command palette and footer).
+- Reduced-motion preferences disable decorative animation globally.
+- Public pages use ISR (60s), so admin edits go live within a minute.
