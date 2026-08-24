@@ -6,9 +6,11 @@ import { toast } from "sonner";
 import { api } from "@/lib/api-client";
 import Skeleton from "@/components/ui/Skeleton";
 import { cn } from "@/lib/utils";
+import ConfirmModal from "@/components/ui/ConfirmModal";
 
 export default function AdminMessagesPage() {
   const [messages, setMessages] = useState(null);
+  const [msgToDelete, setMsgToDelete] = useState(null);
 
   useEffect(() => {
     api
@@ -29,8 +31,14 @@ export default function AdminMessagesPage() {
     }
   };
 
-  const remove = async (msg) => {
-    if (!confirm(`Delete message from ${msg.name}?`)) return;
+  const remove = (msg) => {
+    setMsgToDelete(msg);
+  };
+
+  const confirmDelete = async () => {
+    if (!msgToDelete) return;
+    const msg = msgToDelete;
+    setMsgToDelete(null);
     try {
       await api.delete(`/api/contact/${msg._id}`);
       setMessages((list) => list.filter((m) => m._id !== msg._id));
@@ -104,6 +112,14 @@ export default function AdminMessagesPage() {
           ))
         )}
       </div>
+
+      <ConfirmModal
+        isOpen={!!msgToDelete}
+        title="Delete Message"
+        message={msgToDelete ? `Delete message from ${msgToDelete.name}?` : ""}
+        onConfirm={confirmDelete}
+        onCancel={() => setMsgToDelete(null)}
+      />
     </div>
   );
 }

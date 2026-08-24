@@ -71,7 +71,7 @@ export default function Preloader() {
     >
       <div className="overflow-hidden">
         <p data-line className="font-display text-3xl md:text-5xl font-bold tracking-tight text-cream">
-          Azharuddin <em className="font-serif italic font-normal text-ember">Hassan</em>
+          Azahruddin <em className="font-serif italic font-normal text-ember">Hassan</em>
         </p>
       </div>
       <div className="overflow-hidden mt-3">

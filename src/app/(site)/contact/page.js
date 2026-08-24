@@ -10,7 +10,7 @@ export const revalidate = 60;
 export const metadata = {
   title: "Contact",
   description:
-    "Get in touch with Azharuddin Hassan — full stack developer open to full-time roles and freelance projects.",
+    "Get in touch with Azahruddin Hassan — full stack developer open to full-time roles and freelance projects.",
 };
 
 export default async function ContactPage() {

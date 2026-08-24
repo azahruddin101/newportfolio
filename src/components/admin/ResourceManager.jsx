@@ -1,12 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import { Plus, Pencil, Trash2, X, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { api } from "@/lib/api-client";
 import { Field, Input, Textarea, Select } from "@/components/ui/Field";
 import Button from "@/components/ui/Button";
 import Skeleton from "@/components/ui/Skeleton";
+import ConfirmModal from "@/components/ui/ConfirmModal";
 
 /**
  * Generic admin CRUD screen driven by a field schema.
@@ -27,6 +28,14 @@ export default function ResourceManager({
   const [items, setItems] = useState(null);
   const [editing, setEditing] = useState(null); // null | {} (new) | doc
   const [busy, setBusy] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
+  const editorRef = useRef(null);
+
+  useEffect(() => {
+    if (editing) {
+      editorRef.current?.querySelector("input, textarea, select")?.focus();
+    }
+  }, [!!editing]);
 
   const load = useCallback(async () => {
     try {
@@ -81,8 +90,14 @@ export default function ResourceManager({
     }
   };
 
-  const remove = async (doc) => {
-    if (!confirm(`Delete “${doc[columns[0].key] || "this item"}”? This cannot be undone.`)) return;
+  const remove = (doc) => {
+    setItemToDelete(doc);
+  };
+
+  const confirmDelete = async () => {
+    if (!itemToDelete) return;
+    const doc = itemToDelete;
+    setItemToDelete(null);
     try {
       await api.delete(`${endpoint}/${doc._id}`);
       toast.success("Deleted");
@@ -185,7 +200,7 @@ export default function ResourceManager({
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            ref={(el) => el?.querySelector("input, textarea, select")?.focus()}
+            ref={editorRef}
             className="h-full w-full max-w-xl overflow-y-auto border-l border-line bg-ink-2 p-8"
           >
             <div className="mb-6 flex items-center justify-between">
@@ -219,6 +234,14 @@ export default function ResourceManager({
           </div>
         </div>
       )}
+
+      <ConfirmModal
+        isOpen={!!itemToDelete}
+        title={`Delete ${title}`}
+        message={itemToDelete ? `Delete “${itemToDelete[columns[0].key] || "this item"}”? This cannot be undone.` : ""}
+        onConfirm={confirmDelete}
+        onCancel={() => setItemToDelete(null)}
+      />
     </div>
   );
 }

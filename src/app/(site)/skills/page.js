@@ -7,7 +7,7 @@ export const revalidate = 60;
 export const metadata = {
   title: "Skills",
   description:
-    "Frontend, backend, database, AI and DevOps — the full toolkit of Azharuddin Hassan, Full Stack JavaScript Developer.",
+    "Frontend, backend, database, AI and DevOps — the full toolkit of Azahruddin Hassan, Full Stack JavaScript Developer.",
 };
 
 export default async function SkillsPage() {

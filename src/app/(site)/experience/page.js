@@ -10,7 +10,7 @@ export const revalidate = 60;
 export const metadata = {
   title: "Experience",
   description:
-    "Professional timeline of Azharuddin Hassan — production platforms, AI integrations and full stack engineering.",
+    "Professional timeline of Azahruddin Hassan — production platforms, AI integrations and full stack engineering.",
 };
 
 export default async function ExperiencePage() {
@@ -22,7 +22,7 @@ export default async function ExperiencePage() {
         eyebrow="Track record"
         title="Where I've"
         accent="been"
-        description="A year and a half of production work — compressed learning, real deadlines, shipped software."
+        description="Two years of production work — compressed learning, real deadlines, shipped software."
       />
 
       <div className="mx-auto max-w-4xl px-6 pb-28">

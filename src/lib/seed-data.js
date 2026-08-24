@@ -5,7 +5,7 @@
  */
 
 export const profile = {
-  name: "Azharuddin Mohammad Hassan",
+  name: "Azahruddin Mohammad Hassan",
   title: "Full Stack JavaScript Developer",
   tagline: "I build scalable web apps where crafted frontends meet intelligent backends.",
   shortAbout:
@@ -15,14 +15,14 @@ export const profile = {
   resumeUrl: "/resume.pdf",
   github: "https://github.com/azahruddin101",
   linkedin: "https://www.linkedin.com/in/azhar619",
-  email: "azhruddin986@gmail.com",
+  email: "azahruddin101@gmail.com",
   phone: "+91 6389655708",
   location: "Lucknow, Uttar Pradesh, India",
   availability: "Open to full-time roles & freelance projects",
   socialLinks: [
     { label: "GitHub", url: "https://github.com/azahruddin101", icon: "github" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/azhar619", icon: "linkedin" },
-    { label: "Email", url: "mailto:azhruddin986@gmail.com", icon: "mail" },
+    { label: "Email", url: "mailto:azahruddin101@gmail.com", icon: "mail" },
   ],
   stats: [
     { label: "Years of experience", value: 1.5, suffix: "+" },

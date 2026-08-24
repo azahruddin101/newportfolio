@@ -12,7 +12,7 @@ import { gsap } from "@/animations/gsap";
 import { toggleTheme } from "@/lib/theme-client";
 import { cn } from "@/lib/utils";
 
-const EMAIL = "azhruddin986@gmail.com";
+const EMAIL = "azahruddin101@gmail.com";
 
 /** ⌘K / Ctrl+K command palette with keyboard navigation. */
 export default function CommandPalette() {

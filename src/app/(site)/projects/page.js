@@ -7,7 +7,7 @@ export const revalidate = 60;
 export const metadata = {
   title: "Projects",
   description:
-    "Production platforms and experiments — AI products, OTT streaming, publishing systems and developer tools built by Azharuddin Hassan.",
+    "Production platforms and experiments — AI products, OTT streaming, publishing systems and developer tools built by Azahruddin Hassan.",
 };
 
 export default async function ProjectsPage() {

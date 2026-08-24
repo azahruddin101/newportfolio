@@ -1,6 +1,6 @@
 # Azhar — Developer Portfolio
 
-Premium full-stack developer portfolio for **Azharuddin Mohammad Hassan**, built with Next.js (App Router, JavaScript), MongoDB, GSAP and Three.js. Every piece of content is served from MongoDB and editable through a JWT-protected admin dashboard — no hardcoded portfolio data.
+Premium full-stack developer portfolio for **Azahruddin Mohammad Hassan**, built with Next.js (App Router, JavaScript), MongoDB, GSAP and Three.js. Every piece of content is served from MongoDB and editable through a JWT-protected admin dashboard — no hardcoded portfolio data.
 
 ## Stack
 

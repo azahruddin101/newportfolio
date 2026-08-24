@@ -31,8 +31,8 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Azharuddin Hassan — Full Stack JavaScript Developer",
-    template: "%s — Azharuddin Hassan",
+    default: "Azahruddin Hassan — Full Stack JavaScript Developer",
+    template: "%s — Azahruddin Hassan",
   },
   description:
     "Full Stack JavaScript Developer building scalable web apps with React, Next.js, Node.js, MongoDB and AI — LangChain, LangGraph, OpenAI. Based in Lucknow, India.",
@@ -40,19 +40,19 @@ export const metadata = {
     "Full Stack Developer", "JavaScript", "React", "Next.js", "Node.js",
     "MongoDB", "GenAI", "LangChain", "Portfolio", "Lucknow",
   ],
-  authors: [{ name: "Azharuddin Mohammad Hassan", url: SITE_URL }],
+  authors: [{ name: "Azahruddin Mohammad Hassan", url: SITE_URL }],
   openGraph: {
     type: "website",
     url: SITE_URL,
-    siteName: "Azharuddin Hassan — Portfolio",
-    title: "Azharuddin Hassan — Full Stack JavaScript Developer",
+    siteName: "Azahruddin Hassan — Portfolio",
+    title: "Azahruddin Hassan — Full Stack JavaScript Developer",
     description:
       "Production web apps where crafted frontends meet intelligent backends. React, Next.js, Node.js, MongoDB & AI.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Azharuddin Hassan — Full Stack JavaScript Developer",
+    title: "Azahruddin Hassan — Full Stack JavaScript Developer",
     description:
       "Production web apps where crafted frontends meet intelligent backends.",
   },
@@ -63,11 +63,11 @@ export const metadata = {
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Azharuddin Mohammad Hassan",
+  name: "Azahruddin Mohammad Hassan",
   alternateName: "Azhar",
   jobTitle: "Full Stack JavaScript Developer",
   url: SITE_URL,
-  email: "mailto:azhruddin986@gmail.com",
+  email: "mailto:azahruddin101@gmail.com",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Lucknow",
