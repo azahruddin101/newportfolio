@@ -1,9 +1,10 @@
+export const dynamic = "force-static";
 import { getProjects } from "@/lib/data";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-export default async function sitemap() {
-  const projects = await getProjects();
+export default function sitemap() {
+  const projects = getProjects();
 
   const staticRoutes = ["", "/projects", "/skills", "/experience", "/contact"].map(
     (path) => ({
@@ -16,7 +17,7 @@ export default async function sitemap() {
 
   const projectRoutes = projects.map((project) => ({
     url: `${SITE_URL}/projects/${project.slug}`,
-    lastModified: project.updatedAt ? new Date(project.updatedAt) : new Date(),
+    lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.7,
   }));

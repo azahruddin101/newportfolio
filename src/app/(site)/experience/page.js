@@ -5,16 +5,14 @@ import { getExperience } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
 import { CheckCircle2, Milestone } from "lucide-react";
 
-export const revalidate = 60;
-
 export const metadata = {
   title: "Experience",
   description:
     "Professional timeline of Azahruddin Hassan — production platforms, AI integrations and full stack engineering.",
 };
 
-export default async function ExperiencePage() {
-  const experience = await getExperience();
+export default function ExperiencePage() {
+  const experience = getExperience();
 
   return (
     <>

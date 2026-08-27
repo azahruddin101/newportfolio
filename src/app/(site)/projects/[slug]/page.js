@@ -8,11 +8,9 @@ import TextReveal from "@/animations/TextReveal";
 import Chip from "@/components/ui/Chip";
 import Button from "@/components/ui/Button";
 
-export const revalidate = 60;
-
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+export function generateMetadata({ params }) {
+  const { slug } = params;
+  const project = getProjectBySlug(slug);
   if (!project) return { title: "Project not found" };
   return {
     title: project.title,
@@ -21,12 +19,14 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function ProjectDetailPage({ params }) {
-  const { slug } = await params;
-  const [project, allProjects] = await Promise.all([
-    getProjectBySlug(slug),
-    getProjects(),
-  ]);
+export function generateStaticParams() {
+  return getProjects().map((p) => ({ slug: p.slug }));
+}
+
+export default function ProjectDetailPage({ params }) {
+  const { slug } = params;
+  const project = getProjectBySlug(slug);
+  const allProjects = getProjects();
   if (!project) notFound();
 
   const index = allProjects.findIndex((p) => p.slug === slug);

@@ -1,7 +1,6 @@
 /**
- * Canonical portfolio content.
- * Used by `npm run seed` to populate MongoDB, and as a read-only
- * fallback so the site renders even when the database is unreachable.
+ * Static portfolio data.
+ * Single source of truth — every page reads from here.
  */
 
 export const profile = {
@@ -11,24 +10,26 @@ export const profile = {
   shortAbout:
     "Full Stack Developer from Lucknow shipping production web apps with React, Next.js, Node.js, MongoDB — and AI woven in with LangChain, LangGraph and OpenAI.",
   about:
-    "I'm Azhar — a Full Stack JavaScript Developer with 1.5+ years of experience building production applications that serve real users. My work spans the whole stack: modern, animated frontends in React and Next.js; robust Node.js and Express backends with REST APIs, authentication and role-based access control; and MongoDB data layers tuned for scale.\n\nWhat sets my recent work apart is AI: I've integrated OpenAI, LangChain and LangGraph into real products — RAG pipelines, AI chatbots and intelligent features that users actually rely on. I've also shipped real-time systems with Socket.IO, queue-driven workloads with Redis and BullMQ, and integrated payments, streaming video, shipping and notifications into live platforms.\n\nI care about the details — clean architecture, fast interfaces, and code the next developer will thank me for.",
-  resumeUrl: "/resume.pdf",
+    "I'm Azhar — a Full Stack JavaScript Developer with 2+ years of experience building production applications that serve real users. My work spans the whole stack: modern, animated frontends in React and Next.js; robust Node.js and Express backends with REST APIs, authentication and role-based access control; and MongoDB data layers tuned for scale.\n\nWhat sets my recent work apart is AI: I've integrated OpenAI, LangChain and LangGraph into real products — RAG pipelines, AI chatbots and intelligent features that users actually rely on. I've also shipped real-time systems with Socket.IO, queue-driven workloads with Redis and BullMQ, and integrated payments, streaming video, shipping and notifications into live platforms.\n\nI care about the details — clean architecture, fast interfaces, and code the next developer will thank me for.",
+  resumeUrl: "/Azahruddin_Software_Engineer_Full_Stack_Developer.pdf",
   github: "https://github.com/azahruddin101",
   linkedin: "https://www.linkedin.com/in/azhar619",
   email: "azahruddin101@gmail.com",
   phone: "+91 6389655708",
+  whatsapp: "https://wa.me/916389655708?text=Hi%20Azhar,%20I%20came%20across%20your%20portfolio",
   location: "Lucknow, Uttar Pradesh, India",
   availability: "Open to full-time roles & freelance projects",
   socialLinks: [
-    { label: "GitHub", url: "https://github.com/azahruddin101", icon: "github" },
+    { label: "WhatsApp", url: "https://wa.me/916389655708?text=Hi%20Azhar,%20I%20came%20across%20your%20portfolio", icon: "whatsapp" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/azhar619", icon: "linkedin" },
     { label: "Email", url: "mailto:azahruddin101@gmail.com", icon: "mail" },
+    { label: "GitHub", url: "https://github.com/azahruddin101", icon: "github" },
   ],
   stats: [
-    { label: "Years of experience", value: 1.5, suffix: "+" },
+    { label: "Years of experience", value: 2, suffix: "+" },
     { label: "Production projects", value: 4, suffix: "+" },
-    { label: "Technologies mastered", value: 25, suffix: "+" },
-    { label: "API integrations", value: 11, suffix: "+" },
+    { label: "Technologies mastered", value: 5, suffix: "+" },
+    { label: "API integrations", value: 100, suffix: "+" },
   ],
   keywords: [
     "Full Stack Developer",
@@ -187,32 +188,74 @@ export const projects = [
 
 export const minorProjects = [
   {
-    title: "Portfolio v1",
-    description: "First personal portfolio, deployed on Netlify.",
-    techStack: ["React.js", "CSS", "Netlify"],
-    github: "https://github.com/azahruddin101",
-    demo: "https://azahruddin.netlify.app",
+    title: "Video Streaming Pipeline",
+    description: "Built a video streaming backend with Node.js, Express.js, MongoDB, BullMQ, Redis, and FFmpeg, supporting HLS adaptive streaming and multi-resolution video processing.",
+    techStack: ["Node.js", "Express.js", "MongoDB", "Redis", "FFMPEG"],
+    github: "https://github.com/azahruddin101/nodejs-video-streaming-hls-ffmpeg",
+    demo: "",
     image: "",
     order: 1,
   },
   {
-    title: "AI Chatbot Playground",
-    description: "Experimental RAG chatbot exploring LangChain retrieval patterns and prompt design.",
-    techStack: ["Node.js", "LangChain", "OpenAI"],
-    github: "https://github.com/azahruddin101",
-    demo: "",
-    image: "",
-    order: 2,
-  },
+  title: "AI-Powered Cinema & Mall Analytics",
+
+  description: "MERN-based cinema and mall management system with AI-driven sales analysis, stock forecasting, and a RAG chatbot for spending and movie ticket insights.",
+
+  techStack: ["MongoDB", "Express.js", "React.js", "Node.js", "LangChain", "RAG", "OpenAI"],
+
+  github: "",
+
+  demo: "",
+
+  image: "",
+
+  order: 2,
+},
   {
-    title: "Realtime Chat",
-    description: "Socket.IO chat with rooms, presence and typing indicators.",
-    techStack: ["React.js", "Socket.IO", "Express.js"],
-    github: "https://github.com/azahruddin101",
-    demo: "",
-    image: "",
-    order: 3,
-  },
+  title: "AI Competitor Intelligence Tool",
+
+  description: "Built an AI-powered tool that analyzes cinema competitors across social media and websites, identifies trends, and suggests mall events, themes, and social media content ideas.",
+
+  techStack: ["Node.js", "Puppeteer", "Apify", "LangChain", "OpenAI"],
+
+  github: "",
+
+  demo: "",
+
+  image: "",
+
+  order: 3,
+},
+{
+  title: "Arogyam",
+
+  description: "Built a comprehensive Ayurveda platform combining doctor consultations, e-commerce, e-learning, and short-form educational content for Ayurveda.",
+
+  techStack: ["MongoDB", "Express.js", "React.js", "Node.js"],
+
+  github: "",
+
+  demo: "",
+
+  image: "",
+
+  order: 4,
+},
+{
+  title: "Quick Commerce Platform [Working]",
+
+  description: "Built a full-stack quick commerce platform with location-based store access, real-time delivery tracking, inventory management, role-based dashboards, and race-condition-safe order processing.",
+
+  techStack: ["MongoDB", "Express.js", "React.js", "Node.js", "Expo"],
+
+  github: "",
+
+  demo: "",
+
+  image: "",
+
+  order: 5,
+}
 ];
 
 export const skillCategories = [
@@ -252,8 +295,7 @@ export const skillCategories = [
     skills: [
       { name: "MongoDB", level: 88, note: "" },
       { name: "Mongoose", level: 88, note: "" },
-      { name: "SQL", level: 45, note: "Learning" },
-      { name: "Drizzle ORM", level: 40, note: "Learning" },
+      { name: "Redis", level: 70, note: "Learning" },
     ],
   },
   {
@@ -276,6 +318,7 @@ export const skillCategories = [
     skills: [
       { name: "Git / GitHub", level: 88, note: "" },
       { name: "GitLab CI/CD", level: 72, note: "" },
+      { name: "AWS", level: 20, note: "EC2 Deployment" },
       { name: "Vercel", level: 84, note: "" },
       { name: "Postman", level: 88, note: "" },
       { name: "Vite", level: 84, note: "" },
@@ -294,17 +337,16 @@ export const minorSkills = [
   { name: "Socket.IO", category: "Backend", order: 8 },
   { name: "Cron Jobs", category: "Backend", order: 9 },
   { name: "REST APIs", category: "Backend", order: 10 },
-  { name: "Firebase Auth", category: "Services", order: 11 },
-  { name: "Agora", category: "Services", order: 12 },
-  { name: "Shiprocket", category: "Services", order: 13 },
-  { name: "MUX", category: "Services", order: 14 },
-  { name: "OneSignal", category: "Services", order: 15 },
-  { name: "Razorpay", category: "Services", order: 16 },
-  { name: "Vector Search", category: "AI", order: 17 },
-  { name: "Git", category: "Tools", order: 18 },
-  { name: "GitHub", category: "Tools", order: 19 },
-  { name: "npm", category: "Tools", order: 20 },
-  { name: "VS Code", category: "Tools", order: 21 },
+  { name: "Agora", category: "Services", order: 11 },
+  { name: "Shiprocket", category: "Services", order: 12 },
+  { name: "MUX", category: "Services", order: 13 },
+  { name: "OneSignal", category: "Services", order: 14 },
+  { name: "Razorpay", category: "Services", order: 15 },
+  { name: "Vector Search", category: "AI", order: 16 },
+  { name: "Git", category: "Tools", order: 17 },
+  { name: "GitHub", category: "Tools", order: 18 },
+  { name: "npm", category: "Tools", order: 19 },
+  { name: "VS Code", category: "Tools", order: 20 },
 ];
 
 export const learning = [
@@ -325,22 +367,6 @@ export const learning = [
     order: 2,
   },
   {
-    skill: "SQL",
-    progress: 50,
-    category: "Database",
-    startedDate: "2026-02-01",
-    description: "Relational modeling, joins and query optimization.",
-    order: 3,
-  },
-  {
-    skill: "Drizzle ORM",
-    progress: 40,
-    category: "Database",
-    startedDate: "2026-03-15",
-    description: "Type-safe SQL for modern JS backends.",
-    order: 4,
-  },
-  {
     skill: "System Design",
     progress: 45,
     category: "Architecture",
@@ -349,8 +375,8 @@ export const learning = [
     order: 5,
   },
   {
-    skill: "Advanced DSA",
-    progress: 50,
+    skill: "DSA",
+    progress: 40,
     category: "Fundamentals",
     startedDate: "2026-01-01",
     description: "Sharpening problem-solving depth.",
@@ -368,11 +394,11 @@ export const learning = [
 
 export const experience = [
   {
-    company: "Product Engineering Team",
+    company: "Venture Consultancy Services",
     role: "Full Stack Developer",
     type: "work",
     location: "Lucknow, India",
-    startDate: "2025-02-01",
+    startDate: "2025-07-19",
     endDate: null,
     current: true,
     description:
@@ -385,47 +411,5 @@ export const experience = [
     ],
     technologies: ["Next.js", "React", "Node.js", "MongoDB", "Redis", "OpenAI"],
     order: 1,
-  },
-  {
-    company: "First Development Role",
-    role: "Full Stack Developer (MERN)",
-    type: "work",
-    location: "Lucknow, India",
-    startDate: "2025-02-01",
-    endDate: "2025-08-01",
-    current: false,
-    description:
-      "Started professional journey building CNews — a multi-role news platform — and internal tools on the MERN stack.",
-    highlights: [
-      "Shipped role-based publishing workflows for reporters, editors and admins",
-      "Automated scheduled publishing with cron jobs",
-      "Built responsive admin dashboards and REST APIs",
-    ],
-    technologies: ["MongoDB", "Express.js", "React.js", "Node.js"],
-    order: 2,
-  },
-  {
-    company: "Journey",
-    role: "Learned MERN & shipped first projects",
-    type: "milestone",
-    location: "Lucknow, India",
-    startDate: "2024-06-01",
-    endDate: "2025-01-01",
-    current: false,
-    description:
-      "Went deep on JavaScript, React and Node.js — building projects, learning by shipping, and preparing for production work.",
-    highlights: [],
-    technologies: ["JavaScript", "React.js", "Node.js"],
-    order: 3,
-  },
+  }
 ];
-
-export const seedData = {
-  profile,
-  projects,
-  minorProjects,
-  skillCategories,
-  minorSkills,
-  learning,
-  experience,
-};

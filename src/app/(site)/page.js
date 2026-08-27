@@ -16,18 +16,13 @@ import {
   getExperience,
 } from "@/lib/data";
 
-export const revalidate = 60;
-
-export default async function HomePage() {
-  const [profile, projects, skillCategories, minorSkills, learning, experience] =
-    await Promise.all([
-      getProfile(),
-      getProjects({ featuredOnly: true }),
-      getSkillCategories(),
-      getMinorSkills(),
-      getLearning(),
-      getExperience(),
-    ]);
+export default function HomePage() {
+  const profile = getProfile();
+  const projects = getProjects({ featuredOnly: true });
+  const skillCategories = getSkillCategories();
+  const minorSkills = getMinorSkills();
+  const learning = getLearning();
+  const experience = getExperience();
 
   return (
     <>

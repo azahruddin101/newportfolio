@@ -52,7 +52,15 @@ export default function CommandPalette() {
         group: "Actions",
         label: "Download resume",
         icon: FileDown,
-        run: () => window.open("/resume.pdf", "_blank"),
+        run: () => {
+          const link = document.createElement("a");
+          link.href = "/Azahruddin_Software_Engineer_Full_Stack_Developer.pdf";
+          link.download = "Azahruddin_Software_Engineer_Full_Stack_Developer.pdf";
+          link.target = "_blank";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        },
       },
       {
         group: "Social",

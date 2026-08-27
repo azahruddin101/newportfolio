@@ -2,19 +2,15 @@ import PageHeader from "@/components/PageHeader";
 import SkillsExplorer from "@/components/skills/SkillsExplorer";
 import { getSkillCategories, getMinorSkills } from "@/lib/data";
 
-export const revalidate = 60;
-
 export const metadata = {
   title: "Skills",
   description:
     "Frontend, backend, database, AI and DevOps — the full toolkit of Azahruddin Hassan, Full Stack JavaScript Developer.",
 };
 
-export default async function SkillsPage() {
-  const [categories, minorSkills] = await Promise.all([
-    getSkillCategories(),
-    getMinorSkills(),
-  ]);
+export default function SkillsPage() {
+  const categories = getSkillCategories();
+  const minorSkills = getMinorSkills();
 
   return (
     <>

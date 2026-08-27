@@ -146,7 +146,10 @@ export default function Hero({ profile }) {
             Get in touch
           </Button>
           <Button
-            href={profile.resumeUrl || "/resume.pdf"}
+            href={profile.resumeUrl || "/Azahruddin_Software_Engineer_Full_Stack_Developer.pdf"}
+            download="Azahruddin_Software_Engineer_Full_Stack_Developer.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             variant="ghost"
             size="lg"
             className="w-full border border-ember/60 bg-ember/10 !text-ember hover:bg-ember/20 hover:border-ember sm:w-auto"

@@ -128,51 +128,75 @@ export default function ProjectsExplorer({ projects, minorProjects }) {
       )}
 
       {/* Minor projects */}
-      {minorProjects.length > 0 && (
-        <div className="mt-24">
-          <h2 className="mb-8 flex items-center gap-3 font-display text-2xl font-bold text-cream">
-            <FolderGit2 size={20} className="text-ember" />
-            Smaller experiments
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {minorProjects && minorProjects.length > 0 && (
+        <div className="mt-24 border-t border-line/60 pt-16">
+          <div className="mb-10 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-muted">Experiments & Side Builds</p>
+              <h2 className="mt-2 flex items-center gap-3 font-display text-2xl font-bold text-cream md:text-3xl">
+                <FolderGit2 size={24} className="text-ember" />
+                Minor & Side Projects
+              </h2>
+            </div>
+            <p className="max-w-md text-sm text-cream-dim">
+              Smaller tools, prototypes, and open-source experiments exploring specific libraries and patterns.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {minorProjects.map((mini) => (
               <article
                 key={mini._id || mini.title}
-                className="card-surface group rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1 hover:border-line-strong"
+                className="card-surface sweep-border group relative flex flex-col justify-between rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1"
               >
-                <h3 className="font-display text-lg font-bold text-cream">{mini.title}</h3>
-                <p className="mt-2 text-sm text-cream-dim">{mini.description}</p>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {mini.techStack.map((tech) => (
-                    <span key={tech} className="font-mono text-[10px] uppercase tracking-wider text-muted">
-                      {tech}
-                      <span className="mx-1.5 text-ember/50">/</span>
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                      {String(mini.order || 1).padStart(2, "0")}
                     </span>
-                  ))}
+                    <div className="flex items-center gap-3">
+                      {mini.github && (
+                        <a
+                          href={mini.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${mini.title} source on GitHub`}
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-cream-dim transition-all duration-300 hover:border-ember hover:text-ember"
+                        >
+                          <FiGithub size={14} />
+                        </a>
+                      )}
+                      {mini.demo && (
+                        <a
+                          href={mini.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${mini.title} live demo`}
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-cream-dim transition-all duration-300 hover:rotate-45 hover:border-ember hover:text-ember"
+                        >
+                          <ArrowUpRight size={14} />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <h3 className="mt-3 font-display text-xl font-bold text-cream transition-colors duration-300 group-hover:text-ember">
+                    {mini.title}
+                  </h3>
+
+                  <p className="mt-2 text-sm leading-relaxed text-cream-dim">
+                    {mini.description}
+                  </p>
                 </div>
-                <div className="mt-5 flex gap-4">
-                  {mini.github && (
-                    <a
-                      href={mini.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${mini.title} on GitHub`}
-                      className="text-cream-dim transition-colors hover:text-ember"
-                    >
-                      <FiGithub size={16} />
-                    </a>
-                  )}
-                  {mini.demo && (
-                    <a
-                      href={mini.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${mini.title} live demo`}
-                      className="text-cream-dim transition-colors hover:text-ember"
-                    >
-                      <ArrowUpRight size={16} />
-                    </a>
-                  )}
+
+                <div className="mt-6 pt-4 border-t border-line/40">
+                  <div className="flex flex-wrap gap-1.5">
+                    {mini.techStack?.map((tech) => (
+                      <Chip key={tech} className="text-[11px] px-2.5 py-1">
+                        {tech}
+                      </Chip>
+                    ))}
+                  </div>
                 </div>
               </article>
             ))}

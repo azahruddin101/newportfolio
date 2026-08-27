@@ -2,17 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Send, RotateCcw } from "lucide-react";
-import { toast } from "sonner";
 import { gsap, prefersReducedMotion } from "@/animations/gsap";
-import { api } from "@/lib/api-client";
 import { Field, Input, Textarea } from "@/components/ui/Field";
 import Button from "@/components/ui/Button";
 
 const INITIAL = { name: "", email: "", subject: "", message: "" };
 
-export default function ContactForm() {
+export default function ContactForm({ email: recipientEmail }) {
   const [form, setForm] = useState(INITIAL);
-  const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const successRef = useRef(null);
 
@@ -50,17 +47,14 @@ export default function ContactForm() {
     return () => tl.kill();
   }, [sent]);
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    setSending(true);
-    try {
-      await api.post("/api/contact", form);
-      setSent(true);
-    } catch (err) {
-      toast.error(err.message || "Something went wrong — try again?");
-    } finally {
-      setSending(false);
-    }
+    const subject = encodeURIComponent(form.subject || "Portfolio Contact");
+    const body = encodeURIComponent(
+      `Hi Azhar,\n\nName: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
+    );
+    window.open(`mailto:${recipientEmail}?subject=${subject}&body=${body}`, "_self");
+    setSent(true);
   };
 
   if (sent) {
@@ -82,11 +76,12 @@ export default function ContactForm() {
           />
         </svg>
         <h3 data-success-text className="mt-8 font-display text-3xl font-bold text-cream">
-          Message <em className="font-serif italic font-normal text-ember">received.</em>
+          Message <em className="font-serif italic font-normal text-ember">opened.</em>
         </h3>
         <p data-success-text className="mt-3 max-w-sm text-sm leading-relaxed text-cream-dim">
-          Thanks for reaching out, {form.name.split(" ")[0]} — I&apos;ll get back to you at{" "}
-          <span className="text-ember">{form.email}</span> within a day.
+          Your email client should have opened with a pre-filled message. If it didn&apos;t,
+          you can email me directly at{" "}
+          <a href={`mailto:${recipientEmail}`} className="text-ember hover:underline">{recipientEmail}</a>.
         </p>
         <button
           data-success-text
@@ -118,17 +113,8 @@ export default function ContactForm() {
       <Field label="Message" id="message">
         <Textarea id="message" required maxLength={5000} rows={6} placeholder="Tell me about it…" value={form.message} onChange={set("message")} />
       </Field>
-      <Button type="submit" size="lg" disabled={sending} className="w-full sm:w-auto disabled:opacity-60">
-        {sending ? (
-          <>
-            <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-ink/40 border-t-ink" />
-            Sending…
-          </>
-        ) : (
-          <>
-            Send message <Send size={14} />
-          </>
-        )}
+      <Button type="submit" size="lg" className="w-full sm:w-auto">
+        Send message <Send size={14} />
       </Button>
     </form>
   );

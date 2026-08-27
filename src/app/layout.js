@@ -1,5 +1,4 @@
 import { Syne, Instrument_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
-import { cookies } from "next/headers";
 import { Toaster } from "sonner";
 import "./globals.css";
 
@@ -84,19 +83,13 @@ const personJsonLd = {
   ],
 };
 
-export default async function RootLayout({ children }) {
-  // Theme comes from a cookie so the server renders the correct
-  // data-theme directly — no init script, no flash, nothing for React
-  // to mismatch on. First-time visitors have no cookie: CSS falls back
-  // to their system preference (see globals.css).
-  const cookieStore = await cookies();
-  const themeCookie = cookieStore.get("theme")?.value;
-  const theme = themeCookie === "light" || themeCookie === "dark" ? themeCookie : undefined;
-
+export default function RootLayout({ children }) {
+  // For static export, we rely on the client-side script and CSS prefers-color-scheme
+  // instead of server-side cookies.
+  
   return (
     <html
       lang="en"
-      data-theme={theme}
       suppressHydrationWarning
       className={`${syne.variable} ${instrumentSans.variable} ${instrumentSerif.variable} ${jetbrains.variable} antialiased`}
     >

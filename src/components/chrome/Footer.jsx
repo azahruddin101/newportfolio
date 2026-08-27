@@ -4,8 +4,8 @@ import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { getProfile } from "@/lib/data";
 import Reveal from "@/animations/Reveal";
 
-export default async function Footer() {
-  const profile = await getProfile();
+export default function Footer() {
+  const profile = getProfile();
   const year = new Date().getFullYear();
 
   return (
@@ -70,12 +70,6 @@ export default async function Footer() {
               <Mail size={16} />
             </a>
           </nav>
-          <Link
-            href="/admin"
-            className="font-mono text-[10px] uppercase tracking-widest text-muted/60 transition-colors hover:text-muted"
-          >
-            Admin
-          </Link>
         </div>
       </div>
     </footer>
