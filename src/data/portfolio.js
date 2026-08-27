@@ -398,7 +398,7 @@ export const experience = [
     role: "Full Stack Developer",
     type: "work",
     location: "Lucknow, India",
-    startDate: "2025-07-19",
+    startDate: "2024-07-19",
     endDate: null,
     current: true,
     description:
