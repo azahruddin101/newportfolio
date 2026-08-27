@@ -8,8 +8,8 @@ import TextReveal from "@/animations/TextReveal";
 import Chip from "@/components/ui/Chip";
 import Button from "@/components/ui/Button";
 
-export function generateMetadata({ params }) {
-  const { slug } = params;
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return { title: "Project not found" };
   return {
@@ -23,8 +23,8 @@ export function generateStaticParams() {
   return getProjects().map((p) => ({ slug: p.slug }));
 }
 
-export default function ProjectDetailPage({ params }) {
-  const { slug } = params;
+export default async function ProjectDetailPage({ params }) {
+  const { slug } = await params;
   const project = getProjectBySlug(slug);
   const allProjects = getProjects();
   if (!project) notFound();

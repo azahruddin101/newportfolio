@@ -81,49 +81,57 @@ export default function ProjectsExplorer({ projects, minorProjects }) {
         </div>
       ) : (
         <div ref={gridRef} className="grid gap-6 md:grid-cols-2">
-          {filtered.map((project, i) => (
-            <Link
-              key={project._id || project.slug}
-              href={`/projects/${project.slug}`}
-              data-project-card
-              data-cursor-label="Open"
-              className={cn("group", i % 3 === 0 && "md:col-span-2")}
-            >
-              <article className="card-surface sweep-border relative h-full overflow-hidden rounded-3xl p-8 transition-all duration-500 hover:-translate-y-1 md:p-10">
-                <div
-                  aria-hidden
-                  className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-                  style={{
-                    background: `radial-gradient(70% 90% at 90% 10%, ${project.accent}1c, transparent 60%)`,
-                  }}
-                />
-                <div className="relative">
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.25em]" style={{ color: project.accent }}>
-                      {project.category}
-                    </span>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-cream-dim transition-all duration-500 group-hover:rotate-45 group-hover:border-ember group-hover:text-ember">
-                      <ArrowUpRight size={15} />
-                    </span>
+          {filtered.map((project, i) => {
+            const targetUrl = project.liveDemo || `/projects/${project.slug}`;
+            const isExternal = Boolean(project.liveDemo);
+
+            return (
+              <a
+                key={project._id || project.slug}
+                href={targetUrl}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                data-project-card
+                data-cursor-label={isExternal ? "Open" : "View"}
+                className={cn("group block", i % 3 === 0 && "md:col-span-2")}
+                aria-label={`${project.title} — ${isExternal ? "open live project" : "view details"}`}
+              >
+                <article className="card-surface sweep-border relative h-full overflow-hidden rounded-3xl p-8 transition-all duration-500 hover:-translate-y-1 md:p-10">
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100"
+                    style={{
+                      background: `radial-gradient(70% 90% at 90% 10%, ${project.accent}1c, transparent 60%)`,
+                    }}
+                  />
+                  <div className="relative">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.25em]" style={{ color: project.accent }}>
+                        {project.category}
+                      </span>
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-cream-dim transition-all duration-500 group-hover:rotate-45 group-hover:border-ember group-hover:text-ember">
+                        <ArrowUpRight size={15} />
+                      </span>
+                    </div>
+                    <h2 className="mt-4 font-display text-2xl font-bold text-cream transition-colors duration-300 group-hover:text-ember md:text-3xl">
+                      {project.title}
+                    </h2>
+                    <p className="mt-3 text-sm leading-relaxed text-cream-dim">
+                      {project.description}
+                    </p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {project.technologies.slice(0, 5).map((tech) => (
+                        <Chip key={tech}>{tech}</Chip>
+                      ))}
+                    </div>
+                    <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+                      {project.timeline} · {project.status} {isExternal && "· Live"}
+                    </p>
                   </div>
-                  <h2 className="mt-4 font-display text-2xl font-bold text-cream transition-colors duration-300 group-hover:text-ember md:text-3xl">
-                    {project.title}
-                  </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-cream-dim">
-                    {project.description}
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {project.technologies.slice(0, 5).map((tech) => (
-                      <Chip key={tech}>{tech}</Chip>
-                    ))}
-                  </div>
-                  <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
-                    {project.timeline} · {project.status}
-                  </p>
-                </div>
-              </article>
-            </Link>
-          ))}
+                </article>
+              </a>
+            );
+          })}
         </div>
       )}
 

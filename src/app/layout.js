@@ -59,6 +59,13 @@ export const metadata = {
   robots: { index: true, follow: true },
 };
 
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f2f1f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
+
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -83,16 +90,37 @@ const personJsonLd = {
   ],
 };
 
+// Inline script executed immediately before paint to prevent any theme flash on reload
+const themeInitScript = `
+(function() {
+  try {
+    var cookieTheme = document.cookie.match(/(?:^|;\\s*)theme=([^;]+)/);
+    var saved = cookieTheme ? cookieTheme[1] : localStorage.getItem('theme');
+    var theme = (saved === 'light' || saved === 'dark') ? saved : 'dark';
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'theme-color');
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', theme === 'light' ? '#f2f1f0' : '#000000');
+  } catch (e) {}
+})();
+`;
+
 export default function RootLayout({ children }) {
-  // For static export, we rely on the client-side script and CSS prefers-color-scheme
-  // instead of server-side cookies.
-  
   return (
     <html
       lang="en"
+      data-theme="dark"
       suppressHydrationWarning
       className={`${syne.variable} ${instrumentSans.variable} ${instrumentSerif.variable} ${jetbrains.variable} antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="grain min-h-screen">
         <script
           type="application/ld+json"

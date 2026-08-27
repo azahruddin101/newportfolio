@@ -10,14 +10,18 @@ import { useTilt } from "@/hooks/useTilt";
 
 function ProjectRow({ project, index }) {
   const tiltRef = useTilt({ max: 4 });
+  const targetUrl = project.liveDemo || `/projects/${project.slug}`;
+  const isExternal = Boolean(project.liveDemo);
 
   return (
     <Reveal delay={0.05 * index}>
-      <Link
-        href={`/projects/${project.slug}`}
-        data-cursor-label="View"
+      <a
+        href={targetUrl}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+        data-cursor-label={isExternal ? "Open" : "View"}
         className="group block"
-        aria-label={`${project.title} — view case study`}
+        aria-label={`${project.title} — ${isExternal ? "open live link" : "view case study"}`}
       >
         <article
           ref={tiltRef}
@@ -69,7 +73,7 @@ function ProjectRow({ project, index }) {
 
             <div className="flex items-center gap-3 self-start md:self-end">
               <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted transition-colors group-hover:text-cream">
-                Case study
+                {isExternal ? "Live Project" : "Case study"}
               </span>
               <span className="flex h-12 w-12 items-center justify-center rounded-full border border-line text-cream-dim transition-all duration-500 group-hover:rotate-45 group-hover:border-ember group-hover:text-ember">
                 <ArrowUpRight size={18} />
@@ -77,7 +81,7 @@ function ProjectRow({ project, index }) {
             </div>
           </div>
         </article>
-      </Link>
+      </a>
     </Reveal>
   );
 }
